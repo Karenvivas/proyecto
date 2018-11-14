@@ -15,9 +15,26 @@ class CreateRegistriesTable extends Migration
     {
         Schema::create('registries', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre');
+            $table->string('asunto');
+            $table->string('correo');
+            $table->string('informacion');
             $table->timestamps();
+
+            $table->unsignedInteger('usuario_id');
+
+            $table->foreign('user_id')->references('id')->on('users')
+            ->onDelete('cascade');
+          
+            $table->unsignedInteger('atracciones_id');
+
+            $table->foreign('atracciones_id')->references('id')->on('attractions')
+            ->onDelete('cascade');
+            
+            
         });
     }
+
 
     /**
      * Reverse the migrations.
