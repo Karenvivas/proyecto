@@ -15,6 +15,8 @@ class ActivityController extends Controller
     public function index()
     {
         //
+        $activities = Activity::get();
+        return view('admin.activities.index',compact('activities'));
     }
 
     /**
@@ -25,6 +27,7 @@ class ActivityController extends Controller
     public function create()
     {
         //
+        return view('admin.activities.create');
     }
 
     /**
@@ -36,6 +39,9 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         //
+        $activities = new Activity($request->all());
+        $activities->save();
+        return redirect()->route('activities.index')->with('info','se guardo correctamente');
     }
 
     /**
