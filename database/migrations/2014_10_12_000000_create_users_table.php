@@ -21,7 +21,15 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->unsignedInteger('paquete_id');
+
+            $table->foreign('packages_id')->references('id')->on('packages')
+            ->onDelete('cascade');
         });
+    }
+    public function packages()
+    {
+        return $this->hasOne('App\packages');
     }
 
     /**
